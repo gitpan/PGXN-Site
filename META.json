@@ -30,6 +30,7 @@
       },
       "runtime" : {
          "requires" : {
+            "Data::Dump" : "1.17",
             "Encode" : "2.40",
             "File::Basename" : 0,
             "Gravatar::URL" : "1.02",
@@ -52,31 +53,31 @@
    "provides" : {
       "PGXN::Site" : {
          "file" : "lib/PGXN/Site.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       },
       "PGXN::Site::Controller" : {
          "file" : "lib/PGXN/Site/Controller.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       },
       "PGXN::Site::Locale" : {
          "file" : "lib/PGXN/Site/Locale.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       },
       "PGXN::Site::Locale::en" : {
          "file" : "lib/PGXN/Site/Locale/en.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       },
       "PGXN::Site::Locale::fr" : {
          "file" : "lib/PGXN/Site/Locale/fr.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       },
       "PGXN::Site::Router" : {
          "file" : "lib/PGXN/Site/Router.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       },
       "PGXN::Site::Templates" : {
          "file" : "lib/PGXN/Site/Templates.pm",
-         "version" : "v0.6.4"
+         "version" : "v0.6.5"
       }
    },
    "release_status" : "stable",
@@ -92,5 +93,5 @@
          "url" : "http://github.com/theory/pgxn/tree/"
       }
    },
-   "version" : "v0.6.4"
+   "version" : "v0.6.5"
 }
