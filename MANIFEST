@@ -1,4 +1,4 @@
-bin/pgxn_site.psgi
+bin/pgxn_site_server
 Build.PL
 Changes
 lib/PGXN/Site.pm
