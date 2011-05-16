@@ -12,7 +12,7 @@ build_requires:
 configure_requires:
   Module::Build: 0.30
 dynamic_config: 1
-generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110930'
+generated_by: 'Module::Build version 0.38, CPAN::Meta::Converter version 2.110440'
 license: open_source
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -21,25 +21,25 @@ name: PGXN-Site
 provides:
   PGXN::Site:
     file: lib/PGXN/Site.pm
-    version: v0.7.1
+    version: v0.7.2
   PGXN::Site::Controller:
     file: lib/PGXN/Site/Controller.pm
-    version: v0.7.1
+    version: v0.7.2
   PGXN::Site::Locale:
     file: lib/PGXN/Site/Locale.pm
-    version: v0.7.1
+    version: v0.7.2
   PGXN::Site::Locale::en:
     file: lib/PGXN/Site/Locale/en.pm
-    version: v0.7.1
+    version: v0.7.2
   PGXN::Site::Locale::fr:
     file: lib/PGXN/Site/Locale/fr.pm
-    version: v0.7.1
+    version: v0.7.2
   PGXN::Site::Router:
     file: lib/PGXN/Site/Router.pm
-    version: v0.7.1
+    version: v0.7.2
   PGXN::Site::Templates:
     file: lib/PGXN/Site/Templates.pm
-    version: v0.7.1
+    version: v0.7.2
 requires:
   Data::Dump: 1.17
   Encode: 2.40
@@ -53,6 +53,7 @@ requires:
   Plack::Builder: 0
   Plack::Request: 0.9956
   Plack::Response: 0.9956
+  Router::Resource: 0.11
   SemVer: v0.2.0
   Template::Declare: 0.43
   Template::Declare::Tags: 0.43
@@ -64,4 +65,4 @@ resources:
   homepage: http://www.pgxn.org/
   license: http://www.opensource.org/licenses/postgresql
   repository: http://github.com/theory/pgxn/tree/
-version: v0.7.1
+version: v0.7.2
