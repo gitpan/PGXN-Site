@@ -13,7 +13,7 @@ use File::Basename qw(basename);
 use SemVer;
 use Gravatar::URL;
 #use namespace::autoclean; # Do not use; breaks sort {}
-our $VERSION = v0.7.2;
+our $VERSION = v0.7.3;
 
 my $l = PGXN::Site::Locale->get_handle('en');
 sub T { $l->maketext(@_) }
@@ -330,7 +330,7 @@ template distribution => sub {
                             }
                         }
                         # Create a select list of all other versions.
-                        dt { T 'Other Releases' };
+                        dt { class is 'other'; T 'Other Releases' };
                         dd {
                             select {
                                 onchange is 'window.location.href = this.options[this.selectedIndex].value';
