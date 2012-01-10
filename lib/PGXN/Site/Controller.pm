@@ -11,7 +11,7 @@ use HTML::TagCloud;
 use Encode;
 use WWW::PGXN;
 use namespace::autoclean;
-our $VERSION = v0.7.4;
+our $VERSION = v0.10.0;
 
 Template::Declare->init( dispatch_to => ['PGXN::Site::Templates'] );
 
@@ -78,7 +78,7 @@ sub missing {
 
 sub home {
     my $self  = shift;
-    my $cloud = HTML::TagCloud->new;
+    my $cloud = HTML::TagCloud->new(levels => 12);
     my $tags  = $self->api->get_stats('tag');
     $cloud->add($_->{tag}, "/tag/$_->{tag}/", $_->{dists})
         for grep { $_->{tag} = lc $_->{tag} } @{ $tags->{popular} };
@@ -90,6 +90,11 @@ sub feedback {
     $self->render('/feedback', { env => shift, vars => {
         feedback_to => $self->feedback_to
     } });
+}
+
+sub art {
+    my $self = shift;
+    $self->render('/art', { env => shift });
 }
 
 sub about {
@@ -253,7 +258,7 @@ sub search {
         });
     }
 
-    unless ($params->{in} ~~ ['', undef, qw(docs dists extensions users tags)]) {
+    unless ($params->{in} ~~ [qw(docs dists extensions users tags)]) {
         return $self->render('/badrequest', {
             env => $env,
             code => $code_for{badrequest},
@@ -404,6 +409,12 @@ Displays the HTML for the home page.
   PGXN::Site::Controller->feedback($env);
 
 Displays the HTML for the feedback page.
+
+=head3 C<art>
+
+  PGXN::Site::Controller->art($env);
+
+Displays the HTML for the identity page.
 
 =head3 C<about>
 

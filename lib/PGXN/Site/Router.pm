@@ -6,7 +6,7 @@ use PGXN::Site::Controller;
 use Router::Resource;
 use Plack::Builder;
 use Plack::App::File;
-our $VERSION = v0.7.4;
+our $VERSION = v0.10.0;
 
 sub app {
     my $class = shift;
@@ -74,6 +74,11 @@ sub app {
         # /feedback
         resource qr{^/feedback/?$} => sub {
             GET { $controller->feedback(shift) };
+        };
+
+        # /art
+        resource qr{^/art/?$} => sub {
+            GET { $controller->art(shift) };
         };
 
         # /about

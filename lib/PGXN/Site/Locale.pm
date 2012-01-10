@@ -6,7 +6,7 @@ use parent 'Locale::Maketext';
 use I18N::LangTags::Detect;
 use File::Spec;
 use Carp;
-our $VERSION = v0.7.4;
+our $VERSION = v0.10.0;
 
 # Allow unknown phrases to just pass-through.
 our %Lexicon = (
@@ -42,6 +42,7 @@ our %Lexicon = (
     Mirroring => 'Mirroring',
     'Mirroring PGXN' => 'Mirroring PGXN',
     Feedback => 'Feedback',
+    Identity => 'Identity',
     Extensions => 'Extensions',
     Tags => 'Tags',
     Distributions => 'Distributions',

@@ -1,5 +1,28 @@
 Revision history for Perl extension PGXN::Site
 
+0.10.0  2012-01-10T04:37:24Z
+      - Updated links in the About page.
+      - Reversed the display of the browse and download icons for
+        distributions listed on the user page. This is so that they are in the
+        same order as on the distribution page. Per gripe from Marti Raudsepp.
+      - Now showing an error page when the `in` parameter to `/search` is
+        missing, rather than throwing an exception and returning 500.
+      - Added Email::MIME, Email::Sender::Simple, and Software::License to the
+        list of requirements. The were inadvertently omitted.
+      - Added all core and Plack modules to the list of requirements, just to
+        be safe.
+      - Switched to 12 tag cloud sizes and enabled the CSS for the sizes, now
+        that PGXN has enough tags to make it interesting.
+      - Added Identity page a Creative Commons Attribution-ShareAlike 3.0
+        Unported License, description of fonts, and links to original art
+        work.
+      - Added `Capfile` for capistrano deployment.
+      - Added `eg/debian_init`, an example init script for Debian that runs
+        PGXN::Site on Starman.
+      - Updated the question about a command-line client in the FAQ to point
+        to the client that was actually implemented, rather than the client
+        that was never written.
+
 0.7.4   2011-05-18T17:54:32
       - The router tests are now skipped if PGXN::API::Searcher is not
         installed.

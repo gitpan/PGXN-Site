@@ -3,6 +3,7 @@ package PGXN::Site::Templates;
 use 5.10.0;
 use utf8;
 use parent 'Template::Declare';
+use PGXN::Site;
 use PGXN::Site::Locale;
 use Template::Declare::Tags;
 use Software::License::PostgreSQL;
@@ -13,7 +14,7 @@ use File::Basename qw(basename);
 use SemVer;
 use Gravatar::URL;
 #use namespace::autoclean; # Do not use; breaks sort {}
-our $VERSION = v0.7.4;
+our $VERSION = v0.10.0;
 
 my $l = PGXN::Site::Locale->get_handle('en');
 sub T { $l->maketext(@_) }
@@ -58,7 +59,7 @@ BEGIN { create_wrapper wrapper => sub {
                 link {
                     rel   is 'stylesheet';
                     type  is 'text/css';
-                    href  is "/ui/css/$spec->[0].css?" . __PACKAGE__->VERSION;
+                    href  is "/ui/css/$spec->[0].css?" . PGXN::Site->version_string;
                     media is $spec->[1];
                 };
             }
@@ -139,7 +140,7 @@ BEGIN { create_wrapper wrapper => sub {
                     id is 'width';
                     span {
                         class is 'floatLeft';
-                        outs __PACKAGE__->VERSION;
+                        outs +PGXN::Site->version_string;
                         span { class is 'grey'; '|' };
                         outs 'code';
                         a {
@@ -192,6 +193,12 @@ BEGIN { create_wrapper wrapper => sub {
                             href is '/donors/';
                             title is T 'Donors';
                             T 'Donors';
+                        };
+                        span { class is 'grey'; '|' };
+                        a {
+                            href is '/art/';
+                            title is T 'Identity';
+                            T 'Identity';
                         };
                         span { class is 'grey'; '|' };
                         a {
@@ -1083,6 +1090,10 @@ template donors => sub {
                                 href is 'http://jim.nasby.net/';
                                 'Jim Nasby';
                             }};
+                            li {a{
+                                href is 'http://www.progressivepractice.com/';
+                                'Jon Erdman';
+                            }};
                         };
                     };
                 };
@@ -1150,6 +1161,21 @@ template donors => sub {
         };
     } $req, {
         title => _title_with $title,
+    };
+};
+
+template art => sub {
+    my ($self, $req, $args) = @_;
+    wrapper {
+        div {
+            id is 'info';
+            div {
+                class is 'gradient';
+                outs_raw $l->from_file('art.html');
+            };
+        };
+    } $req, {
+        title => _title_with 'Identity',
     };
 };
 
@@ -1313,18 +1339,6 @@ template release_table => sub {
                         outs_raw qq{<time class="bday" datetime="$info->{date}">$date</time>};
                     };
                     cell {
-                        class is 'download';
-                        a {
-                            class is 'url';
-                            href is URI->new($args->{api_url} . $api->download_path_for($dist => $info->{version}));
-                            title is T 'Download [_1] [_2]', $dist, $info->{version};
-                            img {
-                                src is '/ui/img/download.png';
-                                alt is T 'Download';
-                            };
-                        };
-                    };
-                    cell {
                         class is 'browse';
                         a {
                             class is 'url';
@@ -1335,6 +1349,18 @@ template release_table => sub {
                                 alt is T 'Browse';
                             };
                         }
+                    };
+                    cell {
+                        class is 'download';
+                        a {
+                            class is 'url';
+                            href is URI->new($args->{api_url} . $api->download_path_for($dist => $info->{version}));
+                            title is T 'Download [_1] [_2]', $dist, $info->{version};
+                            img {
+                                src is '/ui/img/download.png';
+                                alt is T 'Download';
+                            };
+                        };
                     };
                 }; # /tr.dist
             }

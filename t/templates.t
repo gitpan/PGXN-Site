@@ -22,7 +22,7 @@ use Plack::Request;
 use HTTP::Message::PSGI;
 
 #plan 'no_plan';
-plan tests => 255;
+plan tests => 260;
 
 Template::Declare->init( dispatch_to => ['PGXN::Site::Templates'] );
 
@@ -264,7 +264,7 @@ sub test_wrapper {
         );
 
         my $i = 0;
-        my $v = PGXN::Site->VERSION;
+        my $v = PGXN::Site->version_string;
         for my $spec (
             [ html   => 'screen, projection, tv' ],
             [ layout => 'screen, projection, tv' ],
@@ -373,7 +373,7 @@ sub test_wrapper {
             $tx->ok('./span[1]', 'Test the first span' => sub {
                 $tx->is('count(./*)', 6, 'Should have 6elements below #floatLeft');
                 $tx->is('./@class', 'floatLeft', 'Should be floatLeft');
-                my $v = PGXN::Site->VERSION;
+                my $v = PGXN::Site->version_string;
                 $tx->like('./text()', qr{^\Q$v\E\b}, qq{Text should contain "$v"});
                 $tx->like('./text()', qr{\bcode\b}, 'Text should contain "code"');
                 $tx->like('./text()', qr{\bdesign\b}, 'Text should contain "design"');
@@ -401,7 +401,7 @@ sub test_wrapper {
                         # [ 'http://twitter.com/pgxn/', 'Twitter',    'Twitter' ],
             $tx->ok('./span[2]', 'Test the first span' => sub {
                 $tx->is('./@class', 'floatRight', 'Should be floatRight');
-                $tx->is('count(./*)', 11, 'Should have 11 elements below #floatRight');
+                $tx->is('count(./*)', 13, 'Should have 11 elements below #floatRight');
                 $tx->ok('./a[1]', 'Test blog anchor', sub {
                     $tx->is('./@href', 'http://blog.pgxn.org/', 'Should link to blog');
                     $tx->is('./@title', 'PGXN Blog', 'Should have link title');
@@ -432,7 +432,13 @@ sub test_wrapper {
                     $tx->is('./text()', 'Donors', 'Should have text "Donors"');
                 });
                 $tx->is('./span[5][@class="grey"]', '|', 'Should have spacer span');
-                $tx->ok('./a[6]', 'Test feedback anchor', sub {
+                $tx->ok('./a[6]', 'Test art anchor', sub {
+                    $tx->is('./@href', '/art/', 'Should link to /art/');
+                    $tx->is('./@title', 'Identity', 'Should have link title');
+                    $tx->is('./text()', 'Identity', 'Should have text "Identity"');
+                });
+                $tx->is('./span[6][@class="grey"]', '|', 'Should have spacer span');
+                $tx->ok('./a[7]', 'Test feedback anchor', sub {
                     $tx->is('./@href', '/feedback/', 'Should link to /feedback/');
                     $tx->is('./@title', 'Feedback', 'Should have link title');
                     $tx->is('./text()', 'Feedback', 'Should have text "Feedback"');

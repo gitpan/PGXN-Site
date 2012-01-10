@@ -2,7 +2,11 @@ package PGXN::Site;
 
 use 5.10.0;
 use utf8;
-our $VERSION = v0.7.4;
+our $VERSION = v0.10.0;
+
+sub version_string {
+    sprintf 'v%vd', $VERSION;
+}
 
 1;
 
@@ -67,6 +71,18 @@ An email address to which feedback emails should be sent. This email address
 will be provided as a clickable link.
 
 =back
+
+=head1 Interface
+
+The PGXN::Site class itself consists of a single class method.
+
+=head2 Class Method
+
+=head3 C<version_string>
+
+  say 'PGXN::Site ', PGXN::Site->version_string;
+
+Returns a string representation of the PGXN::Site version.
 
 =head1 Author
 
