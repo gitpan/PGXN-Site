@@ -6,7 +6,7 @@ use parent 'Locale::Maketext';
 use I18N::LangTags::Detect;
 use File::Spec;
 use Carp;
-our $VERSION = v0.10.0;
+our $VERSION = v0.10.1;
 
 # Allow unknown phrases to just pass-through.
 our %Lexicon = (
@@ -177,6 +177,8 @@ sub _find_file {
 }
 
 1;
+
+=encoding utf8
 
 =head1 Name
 

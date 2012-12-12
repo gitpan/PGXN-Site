@@ -4,7 +4,7 @@
       "David E. Wheeler <david.wheeler@pgexperts.com>"
    ],
    "dynamic_config" : 1,
-   "generated_by" : "Module::Build version 0.38, CPAN::Meta::Converter version 2.112621",
+   "generated_by" : "Module::Build version 0.4003, CPAN::Meta::Converter version 2.120351",
    "license" : [
       "open_source"
    ],
@@ -16,9 +16,9 @@
    "prereqs" : {
       "build" : {
          "requires" : {
-            "HTTP::Message::PSGI" : 0,
+            "HTTP::Message::PSGI" : "0",
             "Module::Build" : "0.30",
-            "Plack::Test" : 0,
+            "Plack::Test" : "0",
             "Software::License" : "0.102340",
             "Test::File::Contents" : "0.20",
             "Test::MockModule" : "0.05",
@@ -33,21 +33,21 @@
       },
       "runtime" : {
          "requires" : {
-            "Carp" : 0,
+            "Carp" : "0",
             "Data::Dump" : "1.17",
             "Email::MIME" : "1.901",
             "Email::Sender::Simple" : "0.093110",
             "Encode" : "2.40",
-            "File::Basename" : 0,
-            "File::Spec" : 0,
+            "File::Basename" : "0",
+            "File::Spec" : "0",
             "Gravatar::URL" : "1.02",
             "HTML::TagCloud" : "0.34",
             "I18N::LangTags::Detect" : "1.03",
             "List::Util" : "1.20",
             "Locale::Maketext" : "1.16",
             "Plack" : "0.9956",
-            "Plack::App::File" : 0,
-            "Plack::Builder" : 0,
+            "Plack::App::File" : "0",
+            "Plack::Builder" : "0",
             "Plack::Request" : "0.9956",
             "Plack::Response" : "0.9956",
             "Router::Resource" : "0.11",
@@ -64,45 +64,45 @@
    "provides" : {
       "PGXN::Site" : {
          "file" : "lib/PGXN/Site.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       },
       "PGXN::Site::Controller" : {
          "file" : "lib/PGXN/Site/Controller.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       },
       "PGXN::Site::Locale" : {
          "file" : "lib/PGXN/Site/Locale.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       },
       "PGXN::Site::Locale::en" : {
          "file" : "lib/PGXN/Site/Locale/en.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       },
       "PGXN::Site::Locale::fr" : {
          "file" : "lib/PGXN/Site/Locale/fr.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       },
       "PGXN::Site::Router" : {
          "file" : "lib/PGXN/Site/Router.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       },
       "PGXN::Site::Templates" : {
          "file" : "lib/PGXN/Site/Templates.pm",
-         "version" : "v0.10.0"
+         "version" : "v0.10.1"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "http://github.com/theory/pgxn/issues/"
+         "web" : "http://github.com/pgxn/pgxn/issues/"
       },
       "homepage" : "http://www.pgxn.org/",
       "license" : [
          "http://www.opensource.org/licenses/postgresql"
       ],
       "repository" : {
-         "url" : "http://github.com/theory/pgxn/tree/"
+         "url" : "http://github.com/pgxn/pgxn/tree/"
       }
    },
-   "version" : "v0.10.0"
+   "version" : "v0.10.1"
 }
