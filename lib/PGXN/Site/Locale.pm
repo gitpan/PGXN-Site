@@ -6,7 +6,7 @@ use parent 'Locale::Maketext';
 use I18N::LangTags::Detect;
 use File::Spec;
 use Carp;
-our $VERSION = v0.10.1;
+our $VERSION = v0.10.3;
 
 # Allow unknown phrases to just pass-through.
 our %Lexicon = (
@@ -56,8 +56,8 @@ our %Lexicon = (
     Supporters => 'Supporters',
     Boosters => 'Boosters',
     'Donors' => 'Donors',
-    'All Donors' => 'All Donors ➡',
-    'See all our great donors!' => 'See all our great donors!',
+    'See a longer list of recent releases.' => 'See a longer list of recent releases.',
+    'More Releases' => 'More Releases →',
     'Not Found' => 'Not Found',
     'Resource not found.' => 'Resource not found.',
     'Resource Not Found' => 'Resource Not Found',
@@ -273,7 +273,7 @@ David E. Wheeler <david.wheeler@pgexperts.com>
 
 =head1 Copyright and License
 
-Copyright (c) 2010-2011 David E. Wheeler.
+Copyright (c) 2010-2013 David E. Wheeler.
 
 This module is free software; you can redistribute it and/or modify it under
 the L<PostgreSQL License|http://www.opensource.org/licenses/postgresql>.

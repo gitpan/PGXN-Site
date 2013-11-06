@@ -1,5 +1,18 @@
 Revision history for Perl extension PGXN::Site
 
+0.10.3  2013-11-06T07:22:46Z
+      - Updated Dalibo logo.
+      - Removed sponsors from the home page. Now showing the five most recent
+        releases, instead.
+      - Removed Pod tests from the distribution.
+
+0.10.2  2013-06-19T06:35:03Z
+      - Distribution links in the user page now include the version, so that
+        it links to the latest version of the distribution released by the
+        user, rather than the latest released by any user.
+      - Replaced use of the smartmatch operator with List::Util::first so as
+        to eliminate deprecation warnings from Perl 5.18.
+
 0.10.1  2012-12-12T07:31:22Z
       - Added an Nginx configuration example to the mirroring page.
       - Updated GitHub URLs to point to `/pgxn/` rather than `/theory/`

@@ -1,11 +1,13 @@
 bin/pgxn_site_server
 Build.PL
 Changes
+eg/debian_init
 lib/PGXN/Site.pm
 lib/PGXN/Site/Controller.pm
 lib/PGXN/Site/Locale.pm
 lib/PGXN/Site/Locale/en.pm
 lib/PGXN/Site/Locale/en/about.mmd
+lib/PGXN/Site/Locale/en/art.mmd
 lib/PGXN/Site/Locale/en/faq.mmd
 lib/PGXN/Site/Locale/en/feedback.mmd
 lib/PGXN/Site/Locale/en/mirroring.mmd
@@ -15,6 +17,12 @@ lib/PGXN/Site/Templates.pm
 lib/PGXN/Site/ui/css/html.css
 lib/PGXN/Site/ui/css/layout.css
 lib/PGXN/Site/ui/css/print.css
+lib/PGXN/Site/ui/img/art/pgxn_logo_banner.eps
+lib/PGXN/Site/ui/img/art/pgxn_logo_banner.svg
+lib/PGXN/Site/ui/img/art/pgxn_logo_gear.eps
+lib/PGXN/Site/ui/img/art/pgxn_logo_gear.svg
+lib/PGXN/Site/ui/img/art/pgxn_logo_type.eps
+lib/PGXN/Site/ui/img/art/pgxn_logo_type.svg
 lib/PGXN/Site/ui/img/bullet.gif
 lib/PGXN/Site/ui/img/dalibo.png
 lib/PGXN/Site/ui/img/download.png

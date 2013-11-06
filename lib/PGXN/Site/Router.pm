@@ -6,14 +6,14 @@ use PGXN::Site::Controller;
 use Router::Resource;
 use Plack::Builder;
 use Plack::App::File;
-our $VERSION = v0.10.1;
+our $VERSION = v0.10.3;
 
 sub app {
     my $class = shift;
     my %p = @_;
     my $controller = PGXN::Site::Controller->new(@_);
     (my $ui = __FILE__) =~ s{Router[.]pm$}{ui};
-    my $files      = Plack::App::File->new(root => $ui);
+    my $files      = Plack::App::File->new(root => $ui)->to_app;
     my $router     = router {
         missing { $controller->missing(@_) };
 
@@ -192,7 +192,7 @@ David E. Wheeler <david.wheeler@pgexperts.com>
 
 =head1 Copyright and License
 
-Copyright (c) 2011 David E. Wheeler.
+Copyright (c) 2010-2013 David E. Wheeler.
 
 This module is free software; you can redistribute it and/or modify it under
 the L<PostgreSQL License|http://www.opensource.org/licenses/postgresql>.

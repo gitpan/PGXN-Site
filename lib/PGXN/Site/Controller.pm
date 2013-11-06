@@ -10,8 +10,9 @@ use PGXN::Site::Templates;
 use HTML::TagCloud;
 use Encode;
 use WWW::PGXN;
+use List::MoreUtils qw(any);
 use namespace::autoclean;
-our $VERSION = v0.10.1;
+our $VERSION = v0.10.3;
 
 Template::Declare->init( dispatch_to => ['PGXN::Site::Templates'] );
 
@@ -82,7 +83,15 @@ sub home {
     my $tags  = $self->api->get_stats('tag');
     $cloud->add($_->{tag}, "/tag/$_->{tag}/", $_->{dists})
         for grep { $_->{tag} = lc $_->{tag} } @{ $tags->{popular} };
-    $self->render('/home', { env => shift, vars => { cloud => $cloud } });
+    my $dists = $self->api->get_stats('dist')->{recent};
+    splice @{ $dists }, 5;
+    $self->render('/home', {
+        env => shift,
+        vars => {
+            cloud => $cloud,
+            dists => $dists,
+        },
+    });
 }
 
 sub feedback {
@@ -240,7 +249,7 @@ sub search {
     my $params = $req->query_parameters;
     my $q = $params->{q};
 
-    if ($q ~~ [undef, '', '*', '?']) {
+    if (!defined $q || any { $q eq $_ } '', '*', '?') {
         # Just redirect if there is no search term.
         unless ($q) {
             my $ref = '/';
@@ -258,7 +267,8 @@ sub search {
         });
     }
 
-    unless ($params->{in} ~~ [qw(docs dists extensions users tags)]) {
+    my $in = $params->{in};
+    unless (defined $in && any { $in eq $_ } qw(docs dists extensions users tags)) {
         return $self->render('/badrequest', {
             env => $env,
             code => $code_for{badrequest},
@@ -276,10 +286,10 @@ sub search {
     }
 
     $self->render('/search', { req => $req, vars => {
-        in      => $params->{in},
+        in      => $in,
         api     => $self->api,
         results => $self->api->search(
-            in     => $params->{in},
+            in     => $in,
             query  => decode_utf8($q),
             offset => $params->{o},
             limit  => $params->{l},
@@ -304,6 +314,12 @@ sub server_error {
         require Email::MIME;
         require Email::Sender::Simple;
         require Data::Dump;
+        if (my $errfh = $env->{'psgi.errors'}) {
+            print {$errfh} "An error occurred during a request to $uri:\n\n"
+                . ($env->{'plack.stacktrace.text'} || 'No Trace. :-(')
+                . "\n";
+        }
+
         my $email = Email::MIME->create(
             header     => [
                 From    => $self->errors_from,
@@ -542,7 +558,7 @@ David E. Wheeler <david.wheeler@pgexperts.com>
 
 =head1 Copyright and License
 
-Copyright (c) 2010-2011 David E. Wheeler.
+Copyright (c) 2010-2013 David E. Wheeler.
 
 This module is free software; you can redistribute it and/or modify it under
 the L<PostgreSQL License|http://www.opensource.org/licenses/postgresql>.

@@ -14,7 +14,7 @@ use File::Basename qw(basename);
 use SemVer;
 use Gravatar::URL;
 #use namespace::autoclean; # Do not use; breaks sort {}
-our $VERSION = v0.10.1;
+our $VERSION = v0.10.3;
 
 my $l = PGXN::Site::Locale->get_handle('en');
 sub T { $l->maketext(@_) }
@@ -234,21 +234,31 @@ template home => sub {
             div {
                 class is 'hside floatLeft gradient';
                 p { T 'pgxn_summary_paragraph' };
-
-                h3 { T 'Founders' };
-                show 'founders';
-                h3 { T 'Patrons' };
-                show 'patrons';
-                h3 { T 'Benefactors' };
-                show 'benefactors';
-                h6 {
-                    class is 'floatRight';
-                    a {
-                        href is '/donors/';
-                        title is T 'See all our great donors!';
-                        T 'All Donors'
-                    }
-                };
+                h3 { T 'Recent Releases' };
+                my $dists = $args->{dists};
+                if ($dists && @{ $dists }) {
+                    dl {
+                        id is 'recent';
+                        for my $dist (@{ $dists }) {
+                            dt { a {
+                                my @vals = map { $dist->{$_} } qw(dist version);
+                                href is '/dist/' . lc join('/', @vals) . '/';
+                                join ' ', @vals
+                            } };
+                            dd { $dist->{abstract} };
+                        };
+                    };
+                    h6 {
+                        class is 'floatRight';
+                        a {
+                            href is '/recent/';
+                            title is T 'See a longer list of recent releases.';
+                            T 'More Releases';
+                        }
+                    };
+                } else {
+                    p { T 'No Releases Yet' }
+                }
             }; # /div.hside floatLeft gradient
 
         }; # /div#homepage
@@ -317,7 +327,7 @@ template distribution => sub {
                         @rels =
                             map  { $_->[0] }
                             sort { $b->[1] <=> $a->[1] }
-                            map  { [ $_ => SemVer->new($_->{version}) ] } @rels, @others;
+                            map  { [ $_ => SemVer->declare($_->{version}) ] } @rels, @others;
                     }
                     if (@rels > 1) {
                         # Show latest version for other statuses.
@@ -1307,7 +1317,8 @@ template search_form => sub {
 
 template release_table => sub {
     my ($self, $req, $rel, $args) = @_;
-    my $api = $args->{api};
+    my $api  = $args->{api};
+    my $user = $args->{user};
     div {
         class is 'gradient dists';
         h3 { T 'Distributions' };
@@ -1322,7 +1333,7 @@ template release_table => sub {
                         class is 'name';
                         a {
                             class is 'url';
-                            href is lc "/dist/$dist/";
+                            href is lc "/dist/$dist" . ($user ? "/$info->{version}/" : '/');
                             span { class is 'fn'; $dist };
                             span { class is 'version'; $info->{version} };
                             span { class is 'status'; "($status)" } if $status ne 'stable';
@@ -1366,12 +1377,10 @@ template release_table => sub {
             }
         } }; # /table
     } else {
-        if (my $user = $args->{user}) {
-            p {
-                class is 'alas';
-                T 'Alas, [_1] has yet to release a distribution.', $user->nickname;
-            };
-        }
+        p {
+            class is 'alas';
+            T 'Alas, [_1] has yet to release a distribution.', $user->nickname;
+        } if $user;
     }
     }; # /div.gradient dists
 };
@@ -1582,7 +1591,7 @@ David E. Wheeler <david.wheeler@pgexperts.com>
 
 =head1 Copyright and License
 
-Copyright (c) 2011 David E. Wheeler.
+Copyright (c) 2010-2013 David E. Wheeler.
 
 This module is free software; you can redistribute it and/or modify it under
 the L<PostgreSQL License|http://www.opensource.org/licenses/postgresql>.

@@ -3,7 +3,7 @@ package PGXN::Site::Locale::fr;
 use 5.10.0;
 use utf8;
 use parent 'PGXN::Site::Locale';
-our $VERSION = v0.10.1;
+our $VERSION = v0.10.3;
 
 our %Lexicon = (
     listcomma => ',',
@@ -34,7 +34,7 @@ David E. Wheeler <david.wheeler@pgexperts.com>
 
 =head1 Copyright and License
 
-Copyright (c) 2010-2011 David E. Wheeler.
+Copyright (c) 2010-2013 David E. Wheeler.
 
 This module is free software; you can redistribute it and/or modify it under
 the L<PostgreSQL License|http://www.opensource.org/licenses/postgresql>.
